@@ -21,7 +21,7 @@ const Title = styled.h1`
 const Header = () => (
   <Container>
     <Logo />
-    <Title>Workout overview</Title>
+    <Title>Workouts</Title>
   </Container>
 );
 
