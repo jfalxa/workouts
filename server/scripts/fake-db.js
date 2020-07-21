@@ -9,7 +9,7 @@ for (let i = 0; i < 1000; i++) {
   const workout = {
     id: i,
     name: faker.random.words(2),
-    description: faker.lorem.sentence(6),
+    description: faker.lorem.sentence(24),
     startDate: faker.date.between("2020-01-01", "2020-12-31"),
     category: faker.random.arrayElement(categories)
   };
