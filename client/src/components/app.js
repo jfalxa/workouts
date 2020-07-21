@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
+import { getAllWorkouts } from "../api";
 import Header from "./header";
 import WorkoutList from "./workout-list";
 
 const App = () => {
   const [workouts, setWorkouts] = useState([]);
+
+  useEffect(() => {
+    getAllWorkouts().then((res) => setWorkouts(res.data));
+  }, []);
 
   return (
     <React.Fragment>
