@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 import { getAllWorkouts } from "../api";
-import Header from "./header";
-import WorkoutList from "./workout-list";
+import WorkoutList from "../components/workout-list";
 
-const App = () => {
+const WorkoutListRoute = () => {
   const [workouts, setWorkouts] = useState([]);
 
   // fetch the complete list of workouts on first render
@@ -12,15 +11,7 @@ const App = () => {
     getAllWorkouts().then((res) => setWorkouts(res.data));
   }, []);
 
-  return (
-    <React.Fragment>
-      <Header />
-
-      <main>
-        <WorkoutList workouts={workouts} />
-      </main>
-    </React.Fragment>
-  );
+  return <WorkoutList workouts={workouts} />;
 };
 
-export default App;
+export default WorkoutListRoute;

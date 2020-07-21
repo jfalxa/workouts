@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import format from "date-fns/format";
+import { Link as RouterLink } from "react-router-dom";
 
 const categories = {
   c1: "Daniel",
@@ -28,7 +29,7 @@ const List = styled.ul`
   list-style: none;
 `;
 
-const Link = styled.a`
+const Link = styled(RouterLink)`
   display: flex;
   align-items: center;
   padding: 12px;
@@ -63,7 +64,7 @@ const StartDate = styled.span`
 
 const WorkoutItem = ({ workout }) => (
   <li>
-    <Link href={`/workouts/${workout.id}`}>
+    <Link to={`/workouts/${workout.id}`}>
       <Category category={workout.category}>
         {categories[workout.category]}
       </Category>
