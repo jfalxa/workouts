@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import Label from "./label";
+import { Label, Clear } from "./system";
 
 const DateBox = styled.div`
   display: flex;
@@ -9,7 +9,10 @@ const DateBox = styled.div`
   padding: 4px 0;
 `;
 
-const DatePicker = styled.input.attrs({ type: "date" })``;
+const DatePicker = styled.input.attrs({ type: "date" })`
+  width: 128px;
+  height: 24px;
+`;
 
 const FilterDate = ({ startDate, onChange }) => {
   return (
@@ -20,6 +23,8 @@ const FilterDate = ({ startDate, onChange }) => {
         value={startDate}
         onChange={(e) => onChange(e.target.value)}
       />
+
+      <Clear onClick={() => onChange("")} />
     </DateBox>
   );
 };

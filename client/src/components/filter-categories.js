@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { names, colors } from "../constants/categories";
-import Label from "./label";
+import { Label, Clear } from "./system";
 
 const CategoryCheckboxBox = styled.div`
   margin-right: 8px;
@@ -52,6 +52,8 @@ const FilterCategories = ({ categories = [], onChange = () => {} }) => {
           onChange={toggleCheckbox}
         />
       ))}
+
+      <Clear onClick={() => onChange([])} />
     </CategoryBox>
   );
 };
