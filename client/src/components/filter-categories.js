@@ -18,7 +18,10 @@ const CategoryCheckbox = ({ value, checked, onChange }) => (
       onChange={onChange}
     />
 
-    <label htmlFor={`cb-${value}`} style={{ color: colors[value] }}>
+    <label
+      htmlFor={`cb-${value}`}
+      style={{ borderBottom: `2px solid ${colors[value]}` }}
+    >
       {names[value]}
     </label>
   </CategoryCheckboxBox>
