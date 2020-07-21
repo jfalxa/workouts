@@ -1,5 +1,13 @@
 const API_ROOT = "http://localhost:3001";
 
+function api(endpoint) {
+  return fetch(API_ROOT + endpoint).then((res) => res.json());
+}
+
 export function getAllWorkouts() {
-  return fetch(API_ROOT + "/workouts").then((res) => res.json());
+  return api("/workouts");
+}
+
+export function getWorkout(id) {
+  return api(`/workouts/${id}`);
 }
