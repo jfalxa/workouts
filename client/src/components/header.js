@@ -4,12 +4,10 @@ import { Link } from "react-router-dom";
 
 import logo from "../logo.svg";
 
-const Container = styled.header`
+const Box = styled.header`
   display: flex;
   align-items: center;
-  background-color: white;
   padding: 8px 16px;
-  box-shadow: 0px 2px 2px #eee;
 `;
 
 const HomeLink = styled(Link).attrs({ to: "/" })`
@@ -30,12 +28,12 @@ const Title = styled.h1`
 `;
 
 const Header = () => (
-  <Container>
+  <Box>
     <HomeLink to="/">
       <Logo />
       <Title>Workouts</Title>
     </HomeLink>
-  </Container>
+  </Box>
 );
 
 export default Header;

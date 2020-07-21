@@ -5,10 +5,7 @@ import { Link } from "react-router-dom";
 const Nav = styled.nav`
   display: flex;
   align-items: center;
-  background: #eee;
-  box-shadow: 0px 2px 2px #ddd;
-  border-top: 1px solid #ddd;
-  padding: 4px 16px;
+  margin: 16px;
 `;
 
 const Arrow = styled(Link)`

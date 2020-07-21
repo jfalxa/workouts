@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import styled from "styled-components";
 
 import { getAllWorkouts } from "../api";
 import Pagination from "../components/pagination";
 import WorkoutList from "../components/workout-list";
+import FilterDate from "../components/filter-date";
+import FilterCategories from "../components/filter-categories";
 
 const LIMIT = 20;
+
+const FilterBox = styled.div`
+  background-color: #eee;
+  padding: 8px 16px;
+  margin: 8px 0;
+  box-shadow: 0px 0px 3px #aaa;
+`;
 
 const WorkoutListRoute = () => {
   const params = useParams();
@@ -31,6 +41,11 @@ const WorkoutListRoute = () => {
 
   return (
     <React.Fragment>
+      <FilterBox>
+        <FilterDate startDate={null} onChange={() => {}} />
+        <FilterCategories categories={[]} onChange={() => {}} />
+      </FilterBox>
+
       <Pagination page={page} total={total} onChange={goToPage} />
       <WorkoutList workouts={workouts} />
       <Pagination page={page} total={total} onChange={goToPage} />
