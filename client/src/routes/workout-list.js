@@ -31,6 +31,7 @@ const WorkoutListRoute = () => {
 
   return (
     <React.Fragment>
+      <Pagination page={page} total={total} onChange={goToPage} />
       <WorkoutList workouts={workouts} />
       <Pagination page={page} total={total} onChange={goToPage} />
     </React.Fragment>
