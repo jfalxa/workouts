@@ -7,8 +7,8 @@ function api(endpoint, options) {
   return fetch(API_ROOT + endpoint + queryString).then((res) => res.json());
 }
 
-export function getAllWorkouts({ page, limit }) {
-  return api("/workouts", { page, limit });
+export function getAllWorkouts(options) {
+  return api("/workouts", options);
 }
 
 export function getWorkout(id) {

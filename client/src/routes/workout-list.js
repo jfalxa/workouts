@@ -24,6 +24,10 @@ const WorkoutListRoute = () => {
   const [total, setTotal] = useState(0);
   const [workouts, setWorkouts] = useState([]);
 
+  // filters
+  const [startDate, setStartDate] = useState("");
+  const [categories, setCategories] = useState([]);
+
   // parse page number from url param
   const page = parseInt(params.page, 10) - 1;
 
@@ -33,17 +37,22 @@ const WorkoutListRoute = () => {
 
   // fetch the wanted list of workouts when a new page is loaded
   useEffect(() => {
-    getAllWorkouts({ page, limit: LIMIT }).then((res) => {
+    const options = { page, limit: LIMIT };
+
+    startDate.length > 0 && (options.startDate = startDate);
+    categories.length > 0 && (options.categories = categories);
+
+    getAllWorkouts(options).then((res) => {
       setTotal(res.meta.total);
       setWorkouts(res.data);
     });
-  }, [page]);
+  }, [page, startDate, categories]);
 
   return (
     <React.Fragment>
       <FilterBox>
-        <FilterDate startDate={null} onChange={() => {}} />
-        <FilterCategories categories={[]} onChange={() => {}} />
+        <FilterDate startDate={startDate} onChange={setStartDate} />
+        <FilterCategories categories={categories} onChange={setCategories} />
       </FilterBox>
 
       <Pagination page={page} total={total} onChange={goToPage} />
