@@ -10,7 +10,7 @@ for (let i = 0; i < 1000; i++) {
     id: i,
     name: faker.random.words(2),
     description: faker.lorem.sentence(24),
-    startDate: faker.date.between("2020-01-01", "2020-12-31"),
+    startDate: faker.date.between("2020-07-21", "2021-07-21"),
     category: faker.random.arrayElement(categories)
   };
 
