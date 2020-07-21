@@ -4,10 +4,15 @@ const db = require("./database");
 const router = new Router();
 
 router.get("/workouts", (req, res) => {
-  const page = parseInt(req.query.page, 10);
-  const limit = parseInt(req.query.limit, 10);
+  const query = req.query;
 
-  const workouts = db.getAllWorkouts();
+  const page = parseInt(query.page, 10);
+  const limit = parseInt(query.limit, 10);
+
+  const startDate = query.startDate ? new Date(query.startDate) : null;
+  const categories = query.categories ? query.categories : null;
+
+  const workouts = db.getAllWorkouts({ startDate, categories });
   const total = Math.ceil(workouts.length / limit);
 
   const meta = { page, total }; // send the total number of pages for front-end pagination
