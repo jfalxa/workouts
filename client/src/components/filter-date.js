@@ -21,7 +21,7 @@ const FilterDate = ({ startDate, onChange }) => {
           Select month
         </option>
         {months.map((month) => (
-          <option value={format(month, "Y-MM-dd")}>
+          <option key={month} value={format(month, "Y-MM-dd")}>
             {format(month, "MMMM Y")}
           </option>
         ))}
