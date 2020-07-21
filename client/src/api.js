@@ -1,4 +1,4 @@
-const API_ROOT = "http://localhost:3001";
+const API_ROOT = `http://${window.location.hostname}:3001`;
 
 function api(endpoint) {
   return fetch(API_ROOT + endpoint).then((res) => res.json());
