@@ -2,26 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import format from "date-fns/format";
 import { Link as RouterLink } from "react-router-dom";
-
-const categories = {
-  c1: "Daniel",
-  c2: "Rosario",
-  c3: "Serrano",
-  c4: "Brady",
-  c5: "Berger",
-  c6: "King",
-  c7: "Haley"
-};
-
-const colors = {
-  c1: "gold",
-  c2: "silver",
-  c3: "orange",
-  c4: "lime",
-  c5: "lightskyblue",
-  c6: "hotpink",
-  c7: "dodgerblue"
-};
+import { colors, names } from "../constants/categories";
 
 const List = styled.ul`
   padding: 0;
@@ -32,7 +13,7 @@ const List = styled.ul`
 const Link = styled(RouterLink)`
   display: flex;
   align-items: center;
-  padding: 12px;
+  padding: 12px 16px;
   color: initial;
   text-decoration: none;
 
@@ -65,12 +46,10 @@ const StartDate = styled.span`
 const WorkoutItem = ({ workout }) => (
   <li>
     <Link to={`/workouts/${workout.id}`}>
-      <Category category={workout.category}>
-        {categories[workout.category]}
-      </Category>
+      <Category category={workout.category}>{names[workout.category]}</Category>
       <Name>{workout.name}</Name>
       <StartDate>
-        starting {format(new Date(workout.startDate), "PPP")}
+        starting {format(new Date(workout.startDate), "dd/MM/y")}
       </StartDate>
     </Link>
   </li>
