@@ -48,6 +48,11 @@ const WorkoutListRoute = () => {
     });
   }, [page, startDate, categories]);
 
+  // prepare pagination to put it in 2 places if neeeded
+  const pagination = total > 1 && (
+    <Pagination page={page} total={total} onChange={goToPage} />
+  );
+
   return (
     <React.Fragment>
       <FilterBox>
@@ -55,9 +60,9 @@ const WorkoutListRoute = () => {
         <FilterCategories categories={categories} onChange={setCategories} />
       </FilterBox>
 
-      <Pagination page={page} total={total} onChange={goToPage} />
+      {pagination}
       <WorkoutList workouts={workouts} />
-      <Pagination page={page} total={total} onChange={goToPage} />
+      {pagination}
     </React.Fragment>
   );
 };

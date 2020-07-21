@@ -12,6 +12,8 @@ const Arrow = styled(Link)`
   margin: 0 8px;
   color: initial;
   text-decoration: none;
+  color: ${(props) => (props.disabled ? "gray" : "black")};
+  pointer-events: ${(props) => (props.disabled ? "none" : "initial")};
 `;
 
 const Menu = styled.select`
@@ -22,11 +24,13 @@ const Menu = styled.select`
 
 const Pagination = ({ page, total, onChange }) => {
   const pages = [...Array(total).keys()]; // create an array with 0,1,2,3,...,total-1
-  const clamp = (value) => Math.max(0, Math.min(value, total - 1)); // keep the value between 0 and total
+  const clamp = (value) => Math.max(1, Math.min(value, total)); // keep the value between 0 and total
 
   return (
     <Nav>
-      <Arrow to={"/list/" + page}>◀</Arrow>
+      <Arrow disabled={page === 0} to={`/list/${clamp(page)}`}>
+        ◀
+      </Arrow>
 
       <Menu value={page} onChange={(e) => onChange(parseInt(e.target.value))}>
         <option disabled>Select page</option>
@@ -37,7 +41,9 @@ const Pagination = ({ page, total, onChange }) => {
         ))}
       </Menu>
 
-      <Arrow to={"/list/" + clamp(page + 2)}>▶</Arrow>
+      <Arrow disabled={page === total - 1} to={`/list/${clamp(page + 2)}`}>
+        ▶
+      </Arrow>
     </Nav>
   );
 };
