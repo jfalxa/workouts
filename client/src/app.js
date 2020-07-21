@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 
 import Header from "./components/header";
 import WorkoutList from "./routes/workout-list";
@@ -11,13 +11,15 @@ const App = () => (
 
     <main>
       <Switch>
-        <Route exact path="/">
+        <Route path="/list/:page">
           <WorkoutList />
         </Route>
 
-        <Route exact path="/workouts/:id">
+        <Route path="/workouts/:id">
           <WorkoutDetails />
         </Route>
+
+        <Redirect from="/" to="/list/1" />
       </Switch>
     </main>
   </BrowserRouter>
