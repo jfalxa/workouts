@@ -1,8 +1,7 @@
 run: run-client run-server
 
 run-client: deps-client
-	cd client; npm run build;
-	npx serve -l 3000 client/build
+	cd client; npm run build; npm run serve;
 
 run-server: deps-server
 	cd server; npm run serve;
@@ -18,5 +17,5 @@ dev-server: deps-server
 deps-client:
 	cd client; npm install;
 
-deps-server: 
+deps-server:
 	cd server; npm install;
