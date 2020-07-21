@@ -1,6 +1,8 @@
+import { format } from "date-fns";
 import React from "react";
 import styled from "styled-components";
 
+import months from "../constants/months";
 import { Label, Clear } from "./system";
 
 const DateBox = styled.div`
@@ -9,20 +11,21 @@ const DateBox = styled.div`
   padding: 4px 0;
 `;
 
-const DatePicker = styled.input.attrs({ type: "date" })`
-  width: 128px;
-  height: 24px;
-`;
-
 const FilterDate = ({ startDate, onChange }) => {
   return (
     <DateBox>
-      <Label>Start date: </Label>
+      <Label>Starting month: </Label>
 
-      <DatePicker
-        value={startDate}
-        onChange={(e) => onChange(e.target.value)}
-      />
+      <select value={startDate} onChange={(e) => onChange(e.target.value)}>
+        <option disabled value="">
+          Select month
+        </option>
+        {months.map((month) => (
+          <option value={format(month, "Y-MM-dd")}>
+            {format(month, "MMMM Y")}
+          </option>
+        ))}
+      </select>
 
       <Clear onClick={() => onChange("")} />
     </DateBox>

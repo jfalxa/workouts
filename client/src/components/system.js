@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Label = styled.label`
   font-style: italic;
   font-size: 14px;
-  width: 80px;
+  width: 104px;
   margin-right: 8px;
 `;
 
