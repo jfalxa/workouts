@@ -7,6 +7,7 @@ import WorkoutList from "./workout-list";
 const App = () => {
   const [workouts, setWorkouts] = useState([]);
 
+  // fetch the complete list of workouts on first render
   useEffect(() => {
     getAllWorkouts().then((res) => setWorkouts(res.data));
   }, []);
