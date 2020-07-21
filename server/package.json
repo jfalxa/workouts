@@ -5,13 +5,16 @@
   "main": "src/index.js",
   "license": "ISC",
   "scripts": {
+    "fakedb": "node scripts/fake-db.js",
     "start": "nodemon src/index.js",
     "serve": "node src/index.js"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "lowdb": "^1.0.0"
   },
   "devDependencies": {
+    "faker": "^4.1.0",
     "nodemon": "^2.0.4"
   }
 }
