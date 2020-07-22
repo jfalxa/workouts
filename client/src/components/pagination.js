@@ -22,9 +22,14 @@ const Menu = styled.select`
   font-size: 14px;
 `;
 
-const Pagination = ({ page, total, onChange }) => {
-  const pages = [...Array(total).keys()]; // create an array with 0,1,2,3,...,total-1
-  const clamp = (value) => Math.max(0, Math.min(value, total - 1)); // keep the value between 0 and total
+const Total = styled.span`
+  font-size: 12px;
+  color: #666;
+`;
+
+const Pagination = ({ page, pages, total, onChange }) => {
+  const options = [...Array(pages).keys()]; // create an array with 0,1,2,3,...,total-1
+  const clamp = (value) => Math.max(0, Math.min(value, pages - 1)); // keep the value between 0 and total
 
   return (
     <Nav>
@@ -34,20 +39,22 @@ const Pagination = ({ page, total, onChange }) => {
 
       <Menu value={page} onChange={(e) => onChange(parseInt(e.target.value))}>
         <option disabled>Select page</option>
-        {pages.map((num) => (
+        {options.map((num) => (
           <option key={num} value={num}>
             {/* display the total number of pages on selected option */}
-            {num + 1} {num === page ? `/ ${total}` : ""}
+            {num + 1} {num === page ? `/ ${pages}` : ""}
           </option>
         ))}
       </Menu>
 
       <Arrow
-        disabled={page === total - 1}
+        disabled={page === pages - 1}
         onClick={() => onChange(clamp(page + 1))}
       >
         ▶
       </Arrow>
+
+      <Total>({total} workouts found)</Total>
     </Nav>
   );
 };

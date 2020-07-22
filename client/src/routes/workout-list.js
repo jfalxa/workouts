@@ -38,6 +38,7 @@ const WorkoutListRoute = () => {
   // fetch the wanted list of workouts when a new page is loaded or filters change
   const workouts = usePromise(fetchWorkouts, [page, startDate, categories]);
   const workoutList = workouts.value?.data;
+  const pages = workouts.value?.meta?.pages;
   const total = workouts.value?.meta?.total;
 
   function goToPage(num) {
@@ -45,13 +46,13 @@ const WorkoutListRoute = () => {
   }
 
   // go back to first page if we're pointing too far
-  if (page < 0 || page >= total) {
+  if (page < 0 || page >= pages) {
     goToPage(0);
   }
 
   // prepare pagination to put it in 2 places if neeeded
-  const pagination = total > 1 && (
-    <Pagination page={page} total={total} onChange={goToPage} />
+  const pagination = pages > 1 && (
+    <Pagination page={page} pages={pages} total={total} onChange={goToPage} />
   );
 
   return (
