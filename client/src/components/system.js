@@ -7,6 +7,11 @@ export const Label = styled.label`
   margin-right: 8px;
 `;
 
+export const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const Banner = styled.div`
   background-color: #eee;
   padding: 8px 16px;
