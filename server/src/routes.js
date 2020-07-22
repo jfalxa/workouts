@@ -22,10 +22,18 @@ router.get("/workouts", (req, res) => {
 });
 
 router.get("/workouts/:id", (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  const workout = db.getWorkout(id);
+  try {
+    const id = parseInt(req.params.id, 10);
+    const workout = db.getWorkout(id);
 
-  res.json({ data: workout });
+    if (workout) {
+      res.json({ data: workout });
+    } else {
+      res.status(404).json({ error: `No workout with id "${id}" found` });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 module.exports = router;
