@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import React from "react";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 
 import { getAllWorkouts } from "../api";
 import usePromise from "../hooks/use-promise";
@@ -13,24 +13,27 @@ import FilterCategories from "../components/filter-categories";
 const LIMIT = 20;
 
 async function fetchWorkouts(page, startDate, categories) {
-  const options = { page, limit: LIMIT };
-
-  startDate.length > 0 && (options.startDate = startDate);
-  categories.length > 0 && (options.categories = categories);
-
-  return getAllWorkouts(options);
+  return getAllWorkouts({ page, limit: LIMIT, startDate, categories });
 }
 
 const WorkoutListRoute = () => {
   const params = useParams();
   const history = useHistory();
-
-  // filters
-  const [startDate, setStartDate] = useState("");
-  const [categories, setCategories] = useState([]);
+  const location = useLocation();
 
   // parse page number from url param
   const page = parseInt(params.page, 10) - 1;
+
+  // filters (stored in history state so it can stay there during navigation)
+  const { startDate, categories } = location.state ?? {};
+
+  function setStartDate(nextStartDate) {
+    history.replace({ state: { startDate: nextStartDate, categories } });
+  }
+
+  function setCategories(nextCategories) {
+    history.replace({ state: { startDate, categories: nextCategories } });
+  }
 
   // fetch the wanted list of workouts when a new page is loaded or filters change
   const workouts = usePromise(fetchWorkouts, [page, startDate, categories]);
@@ -38,7 +41,7 @@ const WorkoutListRoute = () => {
   const total = workouts.value?.meta?.total;
 
   function goToPage(num) {
-    history.push(`/list/${num + 1}`);
+    history.push(`/list/${num + 1}`, { startDate, categories });
   }
 
   // go back to first page if we're pointing too far
