@@ -35,6 +35,11 @@ const WorkoutListRoute = () => {
     history.push(`/list/${num + 1}`);
   }
 
+  // go back to page 1 when filters are changed
+  useEffect(() => {
+    goToPage(0);
+  }, [startDate, categories]);
+
   // fetch the wanted list of workouts when a new page is loaded
   useEffect(() => {
     const options = { page, limit: LIMIT };
