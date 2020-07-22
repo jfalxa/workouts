@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import styled from "styled-components";
 
 import { getAllWorkouts } from "../api";
 import usePromise from "../hooks/use-promise";
+
+import { Banner } from "../components/system";
 import Pagination from "../components/pagination";
 import WorkoutList from "../components/workout-list";
 import FilterDate from "../components/filter-date";
@@ -19,13 +20,6 @@ async function fetchWorkouts(page, startDate, categories) {
 
   return getAllWorkouts(options);
 }
-
-const FilterBox = styled.div`
-  background-color: #eee;
-  padding: 8px 16px;
-  margin: 8px 0;
-  box-shadow: 0px 0px 3px #aaa;
-`;
 
 const WorkoutListRoute = () => {
   const params = useParams();
@@ -59,10 +53,10 @@ const WorkoutListRoute = () => {
 
   return (
     <React.Fragment>
-      <FilterBox>
+      <Banner>
         <FilterDate startDate={startDate} onChange={setStartDate} />
         <FilterCategories categories={categories} onChange={setCategories} />
-      </FilterBox>
+      </Banner>
 
       {pagination}
 
