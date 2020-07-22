@@ -14,9 +14,10 @@ router.get("/workouts", (req, res) => {
     const categories = query.categories ? query.categories : null;
 
     const workouts = db.getAllWorkouts({ startDate, categories });
-    const total = Math.ceil(workouts.length / limit);
+    const total = workouts.length;
+    const pages = Math.ceil(workouts.length / limit);
 
-    const meta = { page, total }; // send the total number of pages for front-end pagination
+    const meta = { pages, total }; // send the number of pages and total of workouts for front-end pagination
     const data = workouts.slice(page * limit, page * limit + limit); // grab only the chunk of workouts we want
 
     res.json({ meta, data });
