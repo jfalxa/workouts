@@ -36,6 +36,7 @@ const Pagination = ({ page, total, onChange }) => {
         <option disabled>Select page</option>
         {pages.map((num) => (
           <option key={num} value={num}>
+            {/* display the total number of pages on selected option */}
             {num + 1} {num === page ? `/ ${total}` : ""}
           </option>
         ))}

@@ -29,7 +29,7 @@ const Title = styled.h1`
 
 const Header = () => (
   <Box>
-    <HomeLink to="/">
+    <HomeLink>
       <Logo />
       <Title>Workouts</Title>
     </HomeLink>

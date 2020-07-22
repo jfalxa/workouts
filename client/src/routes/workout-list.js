@@ -25,7 +25,7 @@ const WorkoutListRoute = () => {
   const page = parseInt(params.page, 10) - 1;
 
   // filters (stored in history state so it can stay there during navigation)
-  const { startDate, categories } = location.state ?? {};
+  const { startDate = "", categories } = location.state ?? {};
 
   function setStartDate(nextStartDate) {
     history.replace({ state: { startDate: nextStartDate, categories } });
