@@ -1,33 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function usePromise(promiseCreator, initialValue = null) {
+function usePromise(promiseCreator, deps) {
   const [{ loading, error, value }, setState] = useState({
     loading: false,
     error: null,
-    value: initialValue
+    value: null
   });
 
-  async function run(...args) {
-    // start process
-    setState({ loading: true, error: null, value: null });
+  // run the promise every time the list of deps changes
+  useEffect(() => {
+    let canceled = false;
 
-    try {
-      const res = await promiseCreator(...args);
-      setState({ loading: false, error: null, value: res });
-      return res;
-    } catch (err) {
-      setState({ loading: false, error: err, value: null });
+    async function run(...args) {
+      setState({ loading: true, error: null, value: null });
+
+      try {
+        const res = await promiseCreator(...args);
+
+        // do not update the state if the promise was canceled
+        !canceled && setState({ loading: false, error: null, value: res });
+
+        return res;
+      } catch (err) {
+        !canceled && setState({ loading: false, error: err, value: null });
+      }
+
+      return null;
     }
 
-    return null;
-  }
+    run(...deps);
 
-  return {
-    loading,
-    error,
-    value,
-    run
-  };
+    return () => (canceled = true);
+  }, [...deps, promiseCreator]); // eslint-disable-line
+
+  return { loading, error, value };
 }
 
 export default usePromise;
