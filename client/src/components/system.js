@@ -19,6 +19,19 @@ export const Banner = styled.div`
   box-shadow: 0px 0px 3px #aaa;
 `;
 
+export const Loading = styled.span.attrs({ children: "Loading..." })`
+  font-size: 18px;
+  font-weight: bold;
+  padding: 16px;
+`;
+
+export const Alert = styled.span`
+  color: red;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 16px;
+`;
+
 export const Clear = styled.button.attrs({
   children: "✕",
   title: "Clear"

@@ -35,26 +35,19 @@ const StartDate = styled.span`
   margin-top: 16px;
 `;
 
-const WorkoutDetails = ({ workout }) => {
-  if (!workout) return <span>Loading...</span>;
+const WorkoutDetails = ({ workout }) => (
+  <Article>
+    <Header>
+      <Name>{workout.name}</Name>
+      <Category category={workout.category}>{names[workout.category]}</Category>
+    </Header>
 
-  return (
-    <Article>
-      <Header>
-        <Name>{workout.name}</Name>
+    <StartDate>
+      Starting {format(new Date(workout.startDate), "PPPP")}
+    </StartDate>
 
-        <Category category={workout.category}>
-          {names[workout.category]}
-        </Category>
-      </Header>
-
-      <StartDate>
-        Starting {format(new Date(workout.startDate), "PPPP")}
-      </StartDate>
-
-      <Description>{workout.description}</Description>
-    </Article>
-  );
-};
+    <Description>{workout.description}</Description>
+  </Article>
+);
 
 export default WorkoutDetails;

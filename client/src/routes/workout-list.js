@@ -4,7 +4,7 @@ import { useHistory, useLocation, useParams } from "react-router-dom";
 import { getAllWorkouts } from "../api";
 import usePromise from "../hooks/use-promise";
 
-import { Banner } from "../components/system";
+import { Banner, Alert, Loading } from "../components/system";
 import Pagination from "../components/pagination";
 import WorkoutList from "../components/workout-list";
 import FilterDate from "../components/filter-date";
@@ -63,13 +63,13 @@ const WorkoutListRoute = () => {
 
       {pagination}
 
-      {workouts.loading && <span>Loading...</span>}
+      {workouts.loading && <Loading />}
 
       {workouts.error && (
-        <span>
+        <Alert>
           An error happened while loading the workout list:
-          {workouts.error.message}
-        </span>
+          {" " + workouts.error.message}
+        </Alert>
       )}
 
       {workouts.value && <WorkoutList workouts={workoutList} />}
