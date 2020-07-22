@@ -3,7 +3,9 @@ import { stringify } from "query-string";
 const API_ROOT = `http://${window.location.hostname}:3001`;
 
 async function api(endpoint, options) {
-  const queryString = options ? "?" + stringify(options) : "";
+  const queryString = options
+    ? "?" + stringify(options, { skipNull: true, skipEmptyString: true })
+    : "";
 
   const res = await fetch(API_ROOT + endpoint + queryString);
   const contentType = res.headers.get("content-type");
