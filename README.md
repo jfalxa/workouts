@@ -18,6 +18,8 @@ The front-end will be accessible at http://localhost:3000, the backend at http:/
 - Category allowed values: `['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7']`
 - The startDate filter will show all months from today till the next 12 months
 - The category filter should be multiple-choice
+- The pagination bar indicates the total amount of workouts, page number, and pages in between.
+- Hide pagination when there are less than 20 results.
 
 ## Front-end stack
 
