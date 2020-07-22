@@ -4,21 +4,25 @@ const db = require("./database");
 const router = new Router();
 
 router.get("/workouts", (req, res) => {
-  const query = req.query;
+  try {
+    const query = req.query;
 
-  const page = parseInt(query.page, 10);
-  const limit = parseInt(query.limit, 10);
+    const page = parseInt(query.page, 10);
+    const limit = parseInt(query.limit, 10);
 
-  const startDate = query.startDate ? new Date(query.startDate) : null;
-  const categories = query.categories ? query.categories : null;
+    const startDate = query.startDate ? new Date(query.startDate) : null;
+    const categories = query.categories ? query.categories : null;
 
-  const workouts = db.getAllWorkouts({ startDate, categories });
-  const total = Math.ceil(workouts.length / limit);
+    const workouts = db.getAllWorkouts({ startDate, categories });
+    const total = Math.ceil(workouts.length / limit);
 
-  const meta = { page, total }; // send the total number of pages for front-end pagination
-  const data = workouts.slice(page * limit, page * limit + limit); // grab only the chunk of workouts we want
+    const meta = { page, total }; // send the total number of pages for front-end pagination
+    const data = workouts.slice(page * limit, page * limit + limit); // grab only the chunk of workouts we want
 
-  res.json({ meta, data });
+    res.json({ meta, data });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 router.get("/workouts/:id", (req, res) => {
