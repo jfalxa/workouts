@@ -28,11 +28,11 @@ const WorkoutListRoute = () => {
   const { startDate = "", categories } = location.state ?? {};
 
   function setStartDate(nextStartDate) {
-    history.replace({ state: { startDate: nextStartDate, categories } });
+    history.push({ state: { startDate: nextStartDate, categories } });
   }
 
   function setCategories(nextCategories) {
-    history.replace({ state: { startDate, categories: nextCategories } });
+    history.push({ state: { startDate, categories: nextCategories } });
   }
 
   // fetch the wanted list of workouts when a new page is loaded or filters change
